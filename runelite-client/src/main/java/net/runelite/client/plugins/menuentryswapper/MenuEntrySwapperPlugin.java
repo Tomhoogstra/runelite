@@ -31,12 +31,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
-import net.runelite.api.Client;
-import net.runelite.api.GameState;
-import net.runelite.api.ItemComposition;
-import net.runelite.api.MenuAction;
-import net.runelite.api.MenuEntry;
-import net.runelite.api.NPC;
+import net.runelite.api.*;
 import net.runelite.api.events.ConfigChanged;
 import net.runelite.api.events.FocusChanged;
 import net.runelite.api.events.MenuEntryAdded;
@@ -347,11 +342,29 @@ public class MenuEntrySwapperPlugin extends Plugin
 			return;
 		}
 
+		if(option.equals("wear") && target.contains("bracelet of ethereum")){
+			swap("use", option, target, false);
+		}
+
 		if (option.equals("talk-to"))
 		{
 			if (config.swapPickpocket() && target.contains("h.a.m."))
 			{
 				swap("pickpocket", option, target, true);
+			}
+
+			if(target.contains("menaphite")){
+				Player p = client.getLocalPlayer();
+				if(p != null) {
+					NPC thug = client.getNpcs().stream().filter(o -> o.getName().equalsIgnoreCase("menaphite thug")
+							&& (p.getWorldLocation().distanceTo(o.getWorldLocation()) < 2)).findFirst().get();
+					if (thug.getAnimation() == -1 || (thug.getModelHeight() > 100 &&  !thug.getOverhead().toLowerCase().contains("zzz"))) {
+						swap("knock-out", option, target, true);
+						swap("pickpocket", "talk-to", target, true);
+					} else {
+						swap("pickpocket", option, target, true);
+					}
+				}
 			}
 
 			if (config.swapAbyssTeleport() && target.contains("mage of zamorak"))
