@@ -130,19 +130,21 @@ public class RaidHelperSceneOverlay extends Overlay {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
-            if (!prayerWidgets.get(0).isHidden()) {
+            if(prayerWidgets.size() > 0) {
+                if (!prayerWidgets.get(0).isHidden()) {
 
 
-                graphics.setColor(Color.MAGENTA);
-                graphics.setStroke(new BasicStroke(4));
-                graphics.drawRect(prayerWidgets.get(0).getCanvasLocation().getX() + 1, prayerWidgets.get(0).getCanvasLocation().getY() + 1, 30, 30);
+                    graphics.setColor(Color.MAGENTA);
+                    graphics.setStroke(new BasicStroke(4));
+                    graphics.drawRect(prayerWidgets.get(0).getCanvasLocation().getX() + 1, prayerWidgets.get(0).getCanvasLocation().getY() + 1, 30, 30);
 
-                graphics.setColor(Color.GREEN);
-                graphics.drawRect(prayerWidgets.get(1).getCanvasLocation().getX() + 1, prayerWidgets.get(1).getCanvasLocation().getY() + 1, 30, 30);
+                    graphics.setColor(Color.GREEN);
+                    graphics.drawRect(prayerWidgets.get(1).getCanvasLocation().getX() + 1, prayerWidgets.get(1).getCanvasLocation().getY() + 1, 30, 30);
 
-                graphics.setColor(Color.RED);
-                graphics.drawRect(prayerWidgets.get(2).getCanvasLocation().getX() + 1, prayerWidgets.get(2).getCanvasLocation().getY() + 1, 30, 30);
+                    graphics.setColor(Color.RED);
+                    graphics.drawRect(prayerWidgets.get(2).getCanvasLocation().getX() + 1, prayerWidgets.get(2).getCanvasLocation().getY() + 1, 30, 30);
 
+                }
             }
         }
 
